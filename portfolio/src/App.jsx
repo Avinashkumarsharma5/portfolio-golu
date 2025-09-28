@@ -1,8 +1,12 @@
 import React from 'react'
-
+import Navbar from './components/layout/navbar.jsx'
 function App() {
   return (
-    <div>App</div>
+    <div>
+      <Navbar />
+
+
+    </div>
   )
 }
 
