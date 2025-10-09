@@ -1,0 +1,40 @@
+.hero {
+  text-align: center;
+  padding: 60px 20px;
+}
+
+.hero-image {
+  width: 150px;
+  border-radius: 50%;
+  margin-bottom: 20px;
+}
+
+.hero-action {
+  margin-top: 20px;
+  display: flex;
+  justify-content: center;
+  gap: 15px;
+}
+
+.hero-connect, .hero-resume {
+  padding: 10px 20px;
+  border-radius: 8px;
+  cursor: pointer;
+  font-weight: 600;
+  transition: all 0.3s ease;
+}
+
+.hero-connect {
+  background-color: #007bff;
+  color: white;
+}
+
+.hero-resume {
+  border: 2px solid #007bff;
+  color: #007bff;
+}
+
+.hero-connect:hover,
+.hero-resume:hover {
+  transform: scale(1.05);
+}
