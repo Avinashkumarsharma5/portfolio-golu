@@ -1,88 +1,91 @@
-/* ---- Base Navbar ---- */
+/* Navbar Base */
 .navbar {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  margin: 20px 170px;
-  transition: all 0.3s ease;
+  padding: 15px 50px;
   position: sticky;
   top: 0;
   z-index: 100;
+  background: transparent;
+  transition: all 0.3s ease;
 }
 
-/* Shadow on scroll */
+/* Navbar Shadow on Scroll */
 .navbar-scrolled {
-  background: rgba(255, 255, 255, 0.85);
-  backdrop-filter: blur(12px);
-  border-bottom: 1px solid rgba(0, 0, 0, 0.1);
-  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.05);
+  background: rgba(255, 255, 255, 0.95);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+  border-bottom: 1px solid rgba(200, 200, 200, 0.2);
 }
 
-/* ---- Logo ---- */
+/* Logo */
 .nav-logo {
   height: 50px;
   cursor: pointer;
 }
 
-/* ---- Menu ---- */
+/* Menu Links */
 .nav-menu {
   display: flex;
-  align-items: center;
   list-style: none;
-  gap: 60px;
-  font-size: 20px;
-  transition: 0.3s ease;
+  gap: 50px;
+  font-size: 18px;
+  align-items: center;
+  transition: all 0.3s ease;
 }
 
 .nav-menu li a {
   text-decoration: none;
   color: #333;
   font-weight: 500;
-  transition: 0.3s;
+  transition: color 0.3s;
 }
 
-.nav-menu li a:hover {
-  color: #b923e1;
+.nav-menu li a:hover,
+.nav-menu li a.active {
+  color: #b923e1; /* Active link color */
 }
 
-/* ---- Connect Button ---- */
+/* Connect Button */
 .nav-connect {
-  padding: 14px 32px;
+  padding: 12px 30px;
   border-radius: 50px;
   background: linear-gradient(267deg, #da7c25 0.36%, #b923e1 99.64%);
-  font-size: 18px;
-  color: white;
+  font-size: 16px;
+  font-weight: 600;
+  color: #fff;
   text-decoration: none;
   cursor: pointer;
-  transition: 0.3s;
+  transition: transform 0.3s ease;
 }
 
 .nav-connect:hover {
   transform: scale(1.05);
 }
 
-/* ---- Mobile Responsive ---- */
+/* Mobile Menu Icon */
 .menu-icon {
   display: none;
   font-size: 28px;
   cursor: pointer;
 }
 
+/* Mobile Responsive */
 @media (max-width: 900px) {
   .navbar {
-    margin: 20px 40px;
+    padding: 15px 20px;
   }
 
   .nav-menu {
     display: none;
     flex-direction: column;
     position: absolute;
-    top: 80px;
-    right: 40px;
-    background: white;
+    top: 70px;
+    right: 20px;
+    background: #fff;
     border-radius: 12px;
     padding: 20px;
-    box-shadow: 0 5px 20px rgba(0, 0, 0, 0.1);
+    box-shadow: 0 5px 20px rgba(0, 0, 0, 0.08);
     gap: 20px;
   }
 
@@ -92,5 +95,9 @@
 
   .menu-icon {
     display: block;
+  }
+
+  .nav-connect {
+    display: none;
   }
 }
