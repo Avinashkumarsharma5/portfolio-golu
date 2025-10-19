@@ -1,27 +1,96 @@
-.navbar{
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    margin: 20px 170px;
+/* ---- Base Navbar ---- */
+.navbar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin: 20px 170px;
+  transition: all 0.3s ease;
+  position: sticky;
+  top: 0;
+  z-index: 100;
 }
+
+/* Shadow on scroll */
+.navbar-scrolled {
+  background: rgba(255, 255, 255, 0.85);
+  backdrop-filter: blur(12px);
+  border-bottom: 1px solid rgba(0, 0, 0, 0.1);
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.05);
+}
+
+/* ---- Logo ---- */
+.nav-logo {
+  height: 50px;
+  cursor: pointer;
+}
+
+/* ---- Menu ---- */
 .nav-menu {
-   display: flex;
-   align-items: center;
-   list-style: none;
-   gap: 60px;
-    font-size: 20px;
-
-}
-.nav-connect{
-    padding: 20px  40px;
-    border-radius:50px;
-    background: linear-gradient(267deg,#da7c25 0.36% , #b923e1 99.64%  );
-    font-size: 22px;
-    cursor:pointer;
-    transition: 0.5s;
-
+  display: flex;
+  align-items: center;
+  list-style: none;
+  gap: 60px;
+  font-size: 20px;
+  transition: 0.3s ease;
 }
 
-.nav-connect:hover{
-    transform: scale(1.05);
+.nav-menu li a {
+  text-decoration: none;
+  color: #333;
+  font-weight: 500;
+  transition: 0.3s;
+}
+
+.nav-menu li a:hover {
+  color: #b923e1;
+}
+
+/* ---- Connect Button ---- */
+.nav-connect {
+  padding: 14px 32px;
+  border-radius: 50px;
+  background: linear-gradient(267deg, #da7c25 0.36%, #b923e1 99.64%);
+  font-size: 18px;
+  color: white;
+  text-decoration: none;
+  cursor: pointer;
+  transition: 0.3s;
+}
+
+.nav-connect:hover {
+  transform: scale(1.05);
+}
+
+/* ---- Mobile Responsive ---- */
+.menu-icon {
+  display: none;
+  font-size: 28px;
+  cursor: pointer;
+}
+
+@media (max-width: 900px) {
+  .navbar {
+    margin: 20px 40px;
+  }
+
+  .nav-menu {
+    display: none;
+    flex-direction: column;
+    position: absolute;
+    top: 80px;
+    right: 40px;
+    background: white;
+    border-radius: 12px;
+    padding: 20px;
+    box-shadow: 0 5px 20px rgba(0, 0, 0, 0.1);
+    gap: 20px;
+  }
+
+  .nav-menu.active {
+    display: flex;
+  }
+
+  .menu-icon {
+    display: block;
+  }
 }
