@@ -1,0 +1,64 @@
+.contact-grid {
+  display: grid;
+  grid-template-columns: 1.1fr 1.1fr;
+  gap: 2rem;
+  margin-top: 1.5rem;
+}
+
+.contact p {
+  font-size: 0.95rem;
+  opacity: 0.85;
+}
+
+.contact-highlight {
+  margin-top: 0.6rem;
+}
+
+.contact-highlight a {
+  color: #bfdbfe;
+  text-decoration: none;
+}
+
+.contact-form {
+  display: flex;
+  flex-direction: column;
+  gap: 0.8rem;
+}
+
+.contact-form input,
+.contact-form textarea {
+  border-radius: 10px;
+  border: 1px solid rgba(51,65,85,0.8);
+  padding: 0.7rem 0.8rem;
+  background: rgba(15,23,42,0.9);
+  color: #e5e7eb;
+  font-size: 0.9rem;
+}
+
+.contact-form input:focus,
+.contact-form textarea:focus {
+  outline: none;
+  border-color: #6366f1;
+}
+
+.contact-form button {
+  border-radius: 999px;
+  border: none;
+  padding: 0.8rem 1.3rem;
+  background: linear-gradient(135deg, #6366f1, #ec4899);
+  color: #f9fafb;
+  font-weight: 600;
+  cursor: pointer;
+  font-size: 0.9rem;
+}
+
+.contact-success {
+  font-size: 0.85rem;
+  color: #4ade80;
+}
+
+@media (max-width: 768px) {
+  .contact-grid {
+    grid-template-columns: 1fr;
+  }
+}

@@ -1,71 +1,181 @@
-import React, { useState, useEffect } from 'react';
-import './Hero.css';
-import profile_img from '../../assets/profile_img.png';
-import { FaGithub, FaLinkedin, FaEnvelope } from 'react-icons/fa';
+import React, { useState, useEffect } from "react";
+import { motion } from "framer-motion";
+import Tilt from "react-parallax-tilt";
+import Particles from "react-tsparticles";
+import { loadSlim } from "tsparticles-slim";
 
-const words = ['I build websites', 'React JS Developer', 'UI/UX Enthusiast', 'Open Source Contributor'];
+import "./Hero.css";
+import profile_img from "../../assets/profile_img.png";
+import { FaGithub, FaLinkedin, FaEnvelope } from "react-icons/fa";
+
+const words = [
+  "React JS Developer",
+  "Frontend Engineer",
+  "UI/UX Enthusiast",
+  "Open Source Contributor",
+];
 
 const Hero = () => {
-  const [text, setText] = useState('');
+  const [text, setText] = useState("");
   const [wordIndex, setWordIndex] = useState(0);
   const [isDeleting, setIsDeleting] = useState(false);
-  const [speed, setSpeed] = useState(150);
+  const [theme, setTheme] = useState("dark");
+
+  const particlesInit = async (engine) => {
+    await loadSlim(engine);
+  };
+
+  const toggleTheme = () => {
+    const next = theme === "light" ? "dark" : "light";
+    setTheme(next);
+    document.body.setAttribute("data-theme", next);
+  };
 
   useEffect(() => {
-    const handleType = () => {
-      const currentWord = words[wordIndex % words.length];
+    const currentWord = words[wordIndex % words.length];
+    const timer = setTimeout(() => {
       if (isDeleting) {
         setText(currentWord.substring(0, text.length - 1));
-        setSpeed(50);
       } else {
         setText(currentWord.substring(0, text.length + 1));
-        setSpeed(150);
       }
 
       if (!isDeleting && text === currentWord) {
-        setTimeout(() => setIsDeleting(true), 1000);
-      } else if (isDeleting && text === '') {
-        setIsDeleting(false);
-        setWordIndex(prev => prev + 1);
+        setTimeout(() => setIsDeleting(true), 900);
       }
-    };
 
-    const timer = setTimeout(handleType, speed);
+      if (isDeleting && text === "") {
+        setIsDeleting(false);
+        setWordIndex((prev) => prev + 1);
+      }
+    }, isDeleting ? 60 : 130);
+
     return () => clearTimeout(timer);
-  }, [text, isDeleting, wordIndex, speed]);
+  }, [text, isDeleting, wordIndex]);
 
   return (
-    <section className="hero">
-      <div className="hero-bg-circle circle1"></div>
-      <div className="hero-bg-circle circle2"></div>
+    <motion.section
+      className={`hero ${theme}`}
+      initial={{ opacity: 0, y: 40 }}
+      animate={{ opacity: 1, y: 0 }}
+      transition={{ duration: 0.7 }}
+    >
+      {/* Particle Background */}
+      <Particles
+        id="tsparticles"
+        init={particlesInit}
+        className="particles"
+        options={{
+          background: { color: "transparent" },
+          fpsLimit: 60,
+          particles: {
+            number: { value: 70, density: { enable: true, area: 800 } },
+            color: { value: ["#6366F1", "#EC4899", "#22C55E"] },
+            links: {
+              enable: true,
+              distance: 130,
+              color: "#6366F1",
+              opacity: 0.4,
+              width: 1,
+            },
+            move: { enable: true, speed: 1, outModes: "bounce" },
+            opacity: { value: 0.5 },
+            size: { value: { min: 1, max: 3 } },
+          },
+        }}
+      />
 
-      <img src={profile_img} alt="Alex Bennett" className="hero-img" />
+      {/* Floating Blobs */}
+      <div className="bg-orb orb1" />
+      <div className="bg-orb orb2" />
+      <div className="bg-orb orb3" />
 
-      <h1>I'm Alex Bennett, Frontend Developer</h1>
-      <h2>{text}<span className="cursor">|</span></h2>
+      {/* Theme Toggle Button */}
+      <button className="theme-toggle" onClick={toggleTheme}>
+        {theme === "light" ? "🌙" : "☀️"}
+      </button>
 
-      <p>I build responsive, modern, and user-friendly web applications. Let’s create something amazing together.</p>
+      <div className="hero-inner ">
+        <p className="availability">
+          <span className="dot" /> Available for Freelance
+        </p>
 
-      <div className="hero-action">
-        <a href="#contact" className="hero-connect">Connect</a>
-        <a href="#portfolio" className="hero-portfolio">View Portfolio</a>
-        <a href="/resume.pdf" download className="hero-resume">Hire Me</a>
+        {/* 3D Profile Image */}
+        <Tilt tiltMaxAngleX={10} tiltMaxAngleY={10} className="tilt-wrapper">
+          <motion.img src={profile_img} alt="Profile" className="hero-img" />
+        </Tilt>
+
+        <h1>
+          Hello, I'm <span className="highlight-name">Avinash Sharma</span>
+        </h1>
+
+        <h2>
+          {text}
+          <span className="cursor">|</span>
+        </h2>
+
+        <p>I build fast, responsive & visually clean UI powered by ReactJS.</p>
+
+        <div className="floating-tech">
+          <span className="badge">React</span>
+          <span className="badge">JavaScript</span>
+          <span className="badge">TailwindCSS</span>
+          <span className="badge">UI/UX</span>
+        </div>
+
+        <div className="hero-action">
+          <a href="#contact" className="hero-connect">
+            Contact
+          </a>
+          <a href="#projects" className="hero-portfolio">
+            Portfolio
+          </a>
+          <a href="/resume.pdf" download className="hero-resume">
+            Resume
+          </a>
+        </div>
+
+        <div className="hero-stats">
+          <span>2+ Years Experience</span>
+          <span>25+ Projects</span>
+          <span>300+ Github Stars</span>
+        </div>
+
+        <div className="hero-socials">
+          <a
+            title="GitHub"
+            href="https://github.com/"
+            target="_blank"
+            rel="noreferrer"
+          >
+            <FaGithub />
+          </a>
+          <a
+            title="LinkedIn"
+            href="https://linkedin.com/"
+            target="_blank"
+            rel="noreferrer"
+          >
+            <FaLinkedin />
+          </a>
+          <a title="Email Me" href="mailto:avinash@gmail.com">
+            <FaEnvelope />
+          </a>
+        </div>
+
+        <div className="scroll-down">↓ Scroll Down</div>
       </div>
 
-      <div className="hero-stats">
-        <span>10+ Years Experience</span>
-        <span>50+ Projects</span>
-        <span>1000+ Github Stars</span>
-      </div>
-
-      <div className="hero-socials">
-        <a href="https://github.com/alex" target="_blank" rel="noopener noreferrer"><FaGithub /></a>
-        <a href="https://linkedin.com/in/alex" target="_blank" rel="noopener noreferrer"><FaLinkedin /></a>
-        <a href="mailto:alex@example.com"><FaEnvelope /></a>
-      </div>
-
-      <div className="scroll-down">↓ Scroll Down</div>
-    </section>
+      {/* WhatsApp Floating Button */}
+      <a
+        href="https://wa.me/916201486202"
+        className="whatsapp-fab"
+        target="_blank"
+        rel="noreferrer"
+      >
+        💬
+      </a>
+    </motion.section>
   );
 };
 

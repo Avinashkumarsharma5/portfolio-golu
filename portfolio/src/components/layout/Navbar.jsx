@@ -1,44 +1,81 @@
-import React, { useState, useEffect } from 'react';
-import './Navbar.css';
-import logo from '../../assets/logo.svg';
+import React, { useState, useEffect } from "react";
+import "./Navbar.css";
+import { FaCode } from "react-icons/fa";
+import { HiMenu, HiX } from "react-icons/hi";
+
+const sections = ["home", "about", "skills", "projects", "contact"];
 
 const Navbar = () => {
-  const [menuOpen, setMenuOpen] = useState(false);
+  const [active, setActive] = useState("home");
+  const [isOpen, setIsOpen] = useState(false);
   const [scrolled, setScrolled] = useState(false);
 
-  // Shadow on scroll
+  // scroll spy + shadow effect
   useEffect(() => {
-    const handleScroll = () => setScrolled(window.scrollY > 50);
-    window.addEventListener('scroll', handleScroll);
-    return () => window.removeEventListener('scroll', handleScroll);
+    const handleScroll = () => {
+      const offset = window.scrollY;
+      setScrolled(offset > 30);
+
+      sections.forEach((id) => {
+        const el = document.getElementById(id);
+        if (el) {
+          const rect = el.getBoundingClientRect();
+          if (rect.top <= 130 && rect.bottom >= 130) {
+            setActive(id);
+          }
+        }
+      });
+    };
+
+    window.addEventListener("scroll", handleScroll);
+    return () => window.removeEventListener("scroll", handleScroll);
   }, []);
 
-  return (
-    <nav className={`navbar ${scrolled ? 'navbar-scrolled' : ''}`}>
-      {/* Logo */}
-      <img src={logo} alt="Logo" className="nav-logo" />
+  const closeMenu = () => setIsOpen(false);
 
-      {/* Menu icon (mobile) */}
-      <div
-        className="menu-icon"
-        onClick={() => setMenuOpen(!menuOpen)}
-      >
-        {menuOpen ? '✕' : '☰'}
+  return (
+    <nav className={`nav ${scrolled ? "nav-scrolled" : ""}`}>
+      <div className="nav-inner">
+        <div className="nav-logo">
+          <FaCode className="nav-logo-icon" />
+          <span>Avinash.dev</span>
+        </div>
+
+        {/* Desktop Menu */}
+        <div className="nav-links">
+          {sections.map((id) => (
+            <a
+              key={id}
+              href={`#${id}`}
+              className={`nav-link ${active === id ? "active" : ""}`}
+            >
+              {id.charAt(0).toUpperCase() + id.slice(1)}
+            </a>
+          ))}
+        </div>
+
+        {/* Mobile Toggle Button */}
+        <button
+          className="mobile-toggle"
+          onClick={() => setIsOpen(!isOpen)}
+        >
+          {isOpen ? <HiX /> : <HiMenu />}
+        </button>
       </div>
 
-      {/* Navigation Links */}
-      <ul className={`nav-menu ${menuOpen ? 'active' : ''}`}>
-        <li><a href="#home">Home</a></li>
-        <li><a href="#about">About Me</a></li>
-        <li><a href="#services">Services</a></li>
-        <li><a href="#portfolio">Portfolio</a></li>
-        <li><a href="#contact">Contact</a></li>
-      </ul>
-
-      {/* Button */}
-      <a href="mailto:alex@example.com" className="nav-connect">
-        Connect with me
-      </a>
+      {/* Mobile Menu */}
+      <div className={`mobile-menu ${isOpen ? "open" : ""}`}>
+        {sections.map((id) => (
+          <a
+            key={id}
+            href={`#${id}`}
+            onClick={closeMenu}
+            className={`mobile-link ${active === id ? "active" : ""}`}
+          >
+            {id.charAt(0).toUpperCase() + id.slice(1)}
+          </a>
+        ))}
+      </div>
     </nav>
   );
 };
