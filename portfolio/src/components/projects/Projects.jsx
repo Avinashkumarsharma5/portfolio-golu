@@ -13,8 +13,8 @@ const PROJECTS = [
       "Multi-service booking flows",
     ],
     tech: ["React", "Tailwind CSS", "Framer Motion", "Node (WIP)"],
-    link: "#",
-    github: "#",
+    link: "www.sanskaraa.co.in",
+    github: "https://avinashkumarsharma5",
     featured: true,
   },
   {
@@ -27,8 +27,8 @@ const PROJECTS = [
       "Clean dashboard layouts",
     ],
     tech: ["React", "Routing", "State Management"],
-    link: "#",
-    github: "#",
+    link: "https://avinashkumarsharma5.github.io/web-school/",
+    github: "https://avinashkumarsharma5",
   },
   {
     title: "Personal Portfolio",
@@ -40,8 +40,8 @@ const PROJECTS = [
       "Founder-focused storytelling",
     ],
     tech: ["React", "Framer Motion", "TSParticles"],
-    link: "#",
-    github: "#",
+    link: "https://avinashkumarsharma5.github.io/portfolio-golu/",
+    github: "https://avinashkumarsharma5",
   },
 ];
 
