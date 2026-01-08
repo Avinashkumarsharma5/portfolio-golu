@@ -55,7 +55,7 @@ const Contact = () => {
 
           <p className="contact-highlight">
             📧 Email:{" "}
-            <a href="mailto:bcaavinash01@gmail.com">bcaavinash01@gmail.com</a>
+            <a href="bcaavinash01@gmail.com">bcaavinash01@gmail.com</a>
           </p>
 
           <p className="contact-highlight">
