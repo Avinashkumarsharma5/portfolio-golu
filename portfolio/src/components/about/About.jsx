@@ -4,7 +4,7 @@ import "./About.css";
 
 const About = () => {
   return (
-    <motion.div
+    <motion.section
       className="section about"
       initial={{ opacity: 0, y: 40 }}
       whileInView={{ opacity: 1, y: 0 }}
@@ -13,55 +13,82 @@ const About = () => {
     >
       <h2 className="section-title">About Me</h2>
       <p className="section-subtitle">
-        A brief story of who I am, what I do and what I love.
+        Builder by mindset, developer by skill — driven by products, not just code.
       </p>
 
       <div className="about-grid">
-        <div>
-          <h3>Who I am</h3>
+        {/* LEFT */}
+        <div className="about-text">
+          <h3>Who I Am</h3>
           <p>
-            I'm <strong>Avinash Sharma</strong>, a frontend developer focused on
-            building clean, responsive and user-friendly interfaces. I enjoy
-            turning complex problems into simple, beautiful and intuitive
-            designs using React and modern web technologies.
+            I’m <strong>Avinash Sharma</strong>, a <strong>Founder & Frontend Developer</strong>
+            who loves building real-world products from scratch. I don’t just focus
+            on UI — I think about users, scalability and long-term product vision.
           </p>
+
           <p>
-            When I’m not coding, I explore UI/UX trends, learn new tools and
-            improve my problem-solving & DSA skills.
+            As the founder of <strong>Sanskaraa</strong>, I’ve experienced the full
+            journey of product building — identifying problems, designing solutions,
+            shipping MVPs and continuously improving based on feedback.
+          </p>
+
+          <p>
+            Alongside startups, I sharpen my technical foundation through React,
+            JavaScript, UI/UX design and computer science fundamentals.
           </p>
         </div>
 
-        <div>
-          <h3>Timeline</h3>
+        {/* RIGHT */}
+        <div className="about-timeline">
+          <h3>My Journey</h3>
           <ul className="timeline">
             <li>
               <span className="timeline-dot" />
               <div>
                 <h4>BCA Student</h4>
-                <p>Currently pursuing BCA and improving core CS fundamentals.</p>
-              </div>
-            </li>
-            <li>
-              <span className="timeline-dot" />
-              <div>
-                <h4>Frontend Projects</h4>
-                <p>Built multiple React based projects & UI clones.</p>
-              </div>
-            </li>
-            <li>
-              <span className="timeline-dot" />
-              <div>
-                <h4>Future Goals</h4>
                 <p>
-                  Master full-stack, crack NIMCET & work on scalable products +
-                  my own startups.
+                  Pursuing BCA while strengthening core CS concepts, DSA and
+                  problem-solving skills.
+                </p>
+              </div>
+            </li>
+
+            <li>
+              <span className="timeline-dot" />
+              <div>
+                <h4>Frontend Developer</h4>
+                <p>
+                  Built multiple React-based applications, focusing on clean UI,
+                  performance and reusable components.
+                </p>
+              </div>
+            </li>
+
+            <li>
+              <span className="timeline-dot" />
+              <div>
+                <h4>Founder @ Sanskaraa</h4>
+                <p>
+                  Building a full-fledged event & puja services platform —
+                  handling product, design and frontend execution.
+                </p>
+              </div>
+            </li>
+
+            <li>
+              <span className="timeline-dot" />
+              <div>
+                <h4>Future Vision</h4>
+                <p>
+                  Become a strong full-stack engineer, crack NIMCET and scale
+                  impactful tech products & startups.
                 </p>
               </div>
             </li>
           </ul>
         </div>
       </div>
-    </motion.div>
+    </motion.section>
   );
 };
 

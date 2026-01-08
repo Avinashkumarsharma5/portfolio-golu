@@ -1,50 +1,70 @@
+.about {
+  max-width: 1100px;
+  margin: auto;
+}
+
 .about-grid {
   display: grid;
-  grid-template-columns: 1.2fr 1fr;
-  gap: 2rem;
-  margin-top: 1.5rem;
+  grid-template-columns: 1.3fr 1fr;
+  gap: 2.5rem;
+  margin-top: 2rem;
+}
+
+/* TEXT */
+.about-text h3,
+.about-timeline h3 {
+  font-size: 1.2rem;
+  margin-bottom: 0.8rem;
 }
 
 .about p {
   font-size: 0.95rem;
-  opacity: 0.85;
+  line-height: 1.7;
+  opacity: 0.88;
+  margin-bottom: 0.8rem;
 }
 
+/* TIMELINE */
 .timeline {
   list-style: none;
   padding-left: 0;
-  border-left: 2px solid rgba(148,163,184,0.5);
-  margin-top: 0.6rem;
+  margin-top: 0.8rem;
+  border-left: 2px solid rgba(148, 163, 184, 0.45);
 }
 
 .timeline li {
   position: relative;
-  margin-bottom: 1.1rem;
-  padding-left: 1rem;
+  padding-left: 1.4rem;
+  margin-bottom: 1.4rem;
 }
 
 .timeline-dot {
   position: absolute;
   left: -7px;
-  top: 3px;
+  top: 4px;
   width: 10px;
   height: 10px;
   border-radius: 999px;
-  background: #6366f1;
+  background: linear-gradient(135deg, #6366f1, #ec4899);
+  box-shadow: 0 0 0 4px rgba(99, 102, 241, 0.2);
 }
 
 .timeline h4 {
   font-size: 0.95rem;
   font-weight: 600;
+  margin-bottom: 0.2rem;
 }
 
 .timeline p {
   font-size: 0.85rem;
   opacity: 0.8;
+  line-height: 1.5;
 }
 
+/* RESPONSIVE */
 @media (max-width: 768px) {
   .about-grid {
     grid-template-columns: 1fr;
+    gap: 2rem;
   }
 }

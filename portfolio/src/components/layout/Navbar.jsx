@@ -10,19 +10,18 @@ const Navbar = () => {
   const [isOpen, setIsOpen] = useState(false);
   const [scrolled, setScrolled] = useState(false);
 
-  // scroll spy + shadow effect
   useEffect(() => {
     const handleScroll = () => {
       const offset = window.scrollY;
-      setScrolled(offset > 30);
+      setScrolled(offset > 40);
 
       sections.forEach((id) => {
         const el = document.getElementById(id);
-        if (el) {
-          const rect = el.getBoundingClientRect();
-          if (rect.top <= 130 && rect.bottom >= 130) {
-            setActive(id);
-          }
+        if (!el) return;
+
+        const rect = el.getBoundingClientRect();
+        if (rect.top <= 120 && rect.bottom >= 120) {
+          setActive(id);
         }
       });
     };
@@ -36,9 +35,12 @@ const Navbar = () => {
   return (
     <nav className={`nav ${scrolled ? "nav-scrolled" : ""}`}>
       <div className="nav-inner">
+        {/* Brand */}
         <div className="nav-logo">
           <FaCode className="nav-logo-icon" />
-          <span>Avinash.dev</span>
+          <span>
+            Avinash<span className="brand-dot">.</span>Sharma
+          </span>
         </div>
 
         {/* Desktop Menu */}
@@ -54,9 +56,10 @@ const Navbar = () => {
           ))}
         </div>
 
-        {/* Mobile Toggle Button */}
+        {/* Mobile Toggle */}
         <button
           className="mobile-toggle"
+          aria-label="Toggle menu"
           onClick={() => setIsOpen(!isOpen)}
         >
           {isOpen ? <HiX /> : <HiMenu />}
