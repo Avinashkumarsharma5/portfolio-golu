@@ -1,109 +1,143 @@
+
 import React from "react";
 import { motion } from "framer-motion";
+import { FaArrowRight, FaGithub, FaGlobe } from "react-icons/fa";
 import "./Projects.css";
 
 const PROJECTS = [
   {
-    title: "Sanskaraa – Puja & Event Platform",
+    title: "Sanskaraa",
+    subtitle: "Puja & Event Services Platform",
     role: "Founder & Frontend Developer",
-    desc: "An end-to-end cultural services platform simplifying puja, pandit booking, decor and event management for Indian households.",
+    desc: "A modern startup platform for puja booking, pandit services, decoration, catering and event management.",
+    tech: ["React", "Tailwind", "Framer Motion", "Node.js"],
     highlights: [
-      "Product ideation & UX design",
-      "Complete frontend architecture",
-      "Multi-service booking flows",
+      "Built complete founder-led product vision",
+      "Designed premium UI/UX and booking flow",
+      "Created scalable multi-service architecture",
     ],
-    tech: ["React", "Tailwind CSS", "Framer Motion", "Node (WIP)"],
-    link: "www.sanskaraa.co.in",
-    github: "https://avinashkumarsharma5",
+    live: "https://www.sanskaraa.co.in",
+    github: "https://github.com/Avinashkumarsharma5",
     featured: true,
+    glow: "purple",
   },
   {
-    title: "QuickDesk – Helpdesk System",
+    title: "QuickDesk",
+    subtitle: "Role-Based Helpdesk System",
     role: "Frontend Engineer",
-    desc: "A role-based helpdesk system with ticket creation, status tracking and admin dashboards for real-world support workflows.",
+    desc: "A complete helpdesk and ticket management platform with user, agent and admin dashboards.",
+    tech: ["React", "Context API", "Routing", "CSS"],
     highlights: [
-      "Role-based UI (User, Agent, Admin)",
-      "Reusable components",
-      "Clean dashboard layouts",
+      "Role-based dashboards",
+      "Reusable component structure",
+      "Modern UI for support workflows",
     ],
-    tech: ["React", "Routing", "State Management"],
-    link: "https://avinashkumarsharma5.github.io/web-school/",
-    github: "https://avinashkumarsharma5",
+    live: "https://avinashkumarsharma5.github.io/web-school/",
+    github: "https://github.com/Avinashkumarsharma5",
+    glow: "blue",
   },
   {
-    title: "Personal Portfolio",
+    title: "Portfolio",
+    subtitle: "Animated Founder Portfolio",
     role: "Designer & Developer",
-    desc: "A modern animated portfolio showcasing my work, skills and founder mindset with smooth UX and dark mode.",
-    highlights: [
-      "Motion-based UI",
-      "Responsive & accessible",
-      "Founder-focused storytelling",
-    ],
+    desc: "A premium animated personal portfolio with futuristic UI, motion and storytelling.",
     tech: ["React", "Framer Motion", "TSParticles"],
-    link: "https://avinashkumarsharma5.github.io/portfolio-golu/",
-    github: "https://avinashkumarsharma5",
+    highlights: [
+      "Smooth motion-based design",
+      "Responsive premium UI",
+      "Strong founder and startup storytelling",
+    ],
+    live: "https://avinashkumarsharma5.github.io/portfolio-golu/",
+    github: "https://github.com/Avinashkumarsharma5",
+    glow: "pink",
   },
 ];
 
 const Projects = () => {
   return (
-    <motion.section
-      className="section projects"
-      initial={{ opacity: 0, y: 40 }}
-      whileInView={{ opacity: 1, y: 0 }}
-      viewport={{ once: true, amount: 0.2 }}
-      transition={{ duration: 0.6 }}
-    >
-      <h2 className="section-title">Projects & Products</h2>
-      <p className="section-subtitle">
-        Real products, real problems — built with ownership, not just code.
-      </p>
+    <section className="projects-section" id="projects">
+      <div className="projects-orb orb-left" />
+      <div className="projects-orb orb-right" />
+
+      <motion.div
+        className="projects-header"
+        initial={{ opacity: 0, y: 30 }}
+        whileInView={{ opacity: 1, y: 0 }}
+        viewport={{ once: true }}
+      >
+        <span className="projects-tag">Projects & Products</span>
+
+        <h2>
+          Products built with
+          <span> ownership & vision</span>
+        </h2>
+
+        <p>
+          From startup ideas like Sanskaraa to modern web applications, these
+          are products I’ve designed, developed and improved with a founder’s mindset.
+        </p>
+      </motion.div>
 
       <div className="projects-grid">
-        {PROJECTS.map((project, idx) => (
+        {PROJECTS.map((project, index) => (
           <motion.article
             key={project.title}
-            className={`project-card ${
-              project.featured ? "featured" : ""
-            }`}
-            initial={{ opacity: 0, y: 30 }}
+            className={`project-card ${project.featured ? "featured" : ""} ${project.glow}`}
+            initial={{ opacity: 0, y: 40 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
-            transition={{ duration: 0.4, delay: idx * 0.12 }}
+            transition={{ delay: index * 0.15 }}
+            whileHover={{ y: -10 }}
           >
+            <div className="project-glow" />
+
             {project.featured && (
-              <span className="project-badge">Flagship Product</span>
+              <span className="featured-badge">Flagship Product</span>
             )}
 
-            <h3>{project.title}</h3>
-            <span className="project-role">{project.role}</span>
+            <div className="project-top">
+              <div>
+                <h3>{project.title}</h3>
+                <span className="project-subtitle">{project.subtitle}</span>
+              </div>
+
+              <span className="project-role">{project.role}</span>
+            </div>
 
             <p className="project-desc">{project.desc}</p>
 
-            <ul className="project-highlights">
-              {project.highlights.map((h) => (
-                <li key={h}>• {h}</li>
-              ))}
-            </ul>
-
-            <div className="project-tags">
-              {project.tech.map((t) => (
-                <span key={t}>{t}</span>
+            <div className="project-tech">
+              {project.tech.map((item) => (
+                <span key={item}>{item}</span>
               ))}
             </div>
 
-            <div className="project-links">
-              <a href={project.link} target="_blank" rel="noreferrer">
-                Live
+            <div className="project-highlights">
+              {project.highlights.map((point) => (
+                <div key={point} className="highlight-item">
+                  <span>•</span>
+                  {point}
+                </div>
+              ))}
+            </div>
+
+            <div className="project-actions">
+              <a href={project.live} target="_blank" rel="noreferrer">
+                <FaGlobe /> Live Demo
               </a>
+
               <a href={project.github} target="_blank" rel="noreferrer">
-                GitHub
+                <FaGithub /> GitHub
               </a>
             </div>
+
+            <button className="project-btn">
+              Explore Project <FaArrowRight />
+            </button>
           </motion.article>
         ))}
       </div>
-    </motion.section>
+    </section>
   );
 };
 

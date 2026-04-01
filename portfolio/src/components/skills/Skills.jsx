@@ -1,79 +1,120 @@
+
 import React from "react";
 import { motion } from "framer-motion";
+import {
+  FaReact,
+  FaJs,
+  FaPalette,
+  FaJava,
+  FaBrain,
+  FaCode,
+} from "react-icons/fa";
 import "./Skills.css";
 
 const SKILLS = [
   {
-    name: "React & Frontend Architecture",
+    icon: <FaReact />,
+    title: "React & Frontend Architecture",
     level: 80,
-    note: "Component design, hooks, performance & scalable UI"
+    desc: "Component design, reusable architecture, hooks and scalable UI systems.",
+    color: "purple",
   },
   {
-    name: "JavaScript (ES6+)",
+    icon: <FaJs />,
+    title: "JavaScript (ES6+)",
     level: 80,
-    note: "Async logic, state handling & clean business logic"
+    desc: "Async handling, business logic, API integration and modern syntax.",
+    color: "yellow",
   },
   {
-    name: "HTML, CSS & Responsive UI",
+    icon: <FaPalette />,
+    title: "UI/UX & Responsive Design",
     level: 90,
-    note: "Pixel-perfect layouts, accessibility & animations"
+    desc: "Premium interfaces, responsive layouts, accessibility and motion.",
+    color: "pink",
   },
   {
-    name: "UI/UX & Product Thinking",
-    level: 75,
-    note: "User flows, MVP thinking & conversion-focused design"
-  },
-  {
-    name: "Java & OOP Concepts",
+    icon: <FaJava />,
+    title: "Java & OOP",
     level: 70,
-    note: "OOP principles, problem-solving & backend foundation"
+    desc: "Strong OOP concepts, logic building and backend fundamentals.",
+    color: "blue",
   },
   {
-    name: "DSA & Problem Solving",
+    icon: <FaBrain />,
+    title: "Product Thinking",
+    level: 75,
+    desc: "MVP planning, founder mindset, user flow and startup problem solving.",
+    color: "green",
+  },
+  {
+    icon: <FaCode />,
+    title: "DSA & Problem Solving",
     level: 65,
-    note: "Core data structures, logic building & optimization"
-  }
+    desc: "Core data structures, algorithms and analytical thinking.",
+    color: "orange",
+  },
 ];
 
 const Skills = () => {
   return (
-    <motion.section
-      className="section skills"
-      initial={{ opacity: 0, y: 40 }}
-      whileInView={{ opacity: 1, y: 0 }}
-      viewport={{ once: true, amount: 0.3 }}
-      transition={{ duration: 0.6 }}
-    >
-      <h2 className="section-title">Skills & Strengths</h2>
-      <p className="section-subtitle">
-        A blend of engineering skills and product mindset — focused on building
-        real, scalable solutions.
-      </p>
+    <section className="skills-section" id="skills">
+      <div className="skills-orb orb-left" />
+      <div className="skills-orb orb-right" />
+
+      <motion.div
+        className="skills-header"
+        initial={{ opacity: 0, y: 30 }}
+        whileInView={{ opacity: 1, y: 0 }}
+        viewport={{ once: true }}
+      >
+        <span className="skills-tag">Skills & Strengths</span>
+
+        <h2>
+          A blend of engineering
+          <span> and product mindset</span>
+        </h2>
+
+        <p>
+          I combine technical skills with founder thinking to build products
+          that are not only functional, but meaningful and scalable.
+        </p>
+      </motion.div>
 
       <div className="skills-grid">
-        {SKILLS.map((skill, idx) => (
-          <div className="skill-item" key={skill.name}>
-            <div className="skill-header">
-              <div>
-                <span className="skill-name">{skill.name}</span>
-                <span className="skill-note">{skill.note}</span>
-              </div>
-              <span className="skill-level">{skill.level}%</span>
+        {SKILLS.map((skill, index) => (
+          <motion.div
+            key={skill.title}
+            className={`skill-card ${skill.color}`}
+            initial={{ opacity: 0, y: 30 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ delay: index * 0.12 }}
+            whileHover={{ y: -10 }}
+          >
+            <div className="skill-glow" />
+
+            <div className="skill-top">
+              <div className="skill-icon">{skill.icon}</div>
+              <span className="skill-percent">{skill.level}%</span>
             </div>
 
-            <div className="skill-bar">
+            <h3>{skill.title}</h3>
+            <p>{skill.desc}</p>
+
+            <div className="progress-bar">
               <motion.div
-                className="skill-bar-fill"
+                className="progress-fill"
                 initial={{ width: 0 }}
                 whileInView={{ width: `${skill.level}%` }}
                 viewport={{ once: true }}
-                transition={{ duration: 0.7, delay: idx * 0.05 }}
+                transition={{ duration: 1, delay: index * 0.12 }}
               />
             </div>
-          </div>
+          </motion.div>
         ))}
       </div>
-    </motion.section>
+    </section>
   );
 };
 

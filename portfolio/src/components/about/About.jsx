@@ -1,94 +1,131 @@
+
 import React from "react";
 import { motion } from "framer-motion";
+import {
+  FaLaptopCode,
+  FaRocket,
+  FaGraduationCap,
+  FaBullseye,
+} from "react-icons/fa";
 import "./About.css";
 
 const About = () => {
+  const cards = [
+    {
+      icon: <FaGraduationCap />,
+      title: "BCA Student",
+      text: "Pursuing BCA while improving DSA, Java and core computer science concepts.",
+    },
+    {
+      icon: <FaLaptopCode />,
+      title: "Frontend Developer",
+      text: "Building premium React applications with clean UI, motion and modern UX.",
+    },
+    {
+      icon: <FaRocket />,
+      title: "Founder @ Sanskaraa",
+      text: "Creating a startup focused on puja, events and cultural services with modern technology.",
+    },
+    {
+      icon: <FaBullseye />,
+      title: "Future Vision",
+      text: "Crack NIMCET, become a full-stack engineer and build impactful startups.",
+    },
+  ];
+
   return (
-    <motion.section
-      className="section about"
-      initial={{ opacity: 0, y: 40 }}
-      whileInView={{ opacity: 1, y: 0 }}
-      viewport={{ once: true, amount: 0.3 }}
-      transition={{ duration: 0.6 }}
-    >
-      <h2 className="section-title">About Me</h2>
-      <p className="section-subtitle">
-        Builder by mindset, developer by skill — driven by products, not just code.
-      </p>
+    <section className="about-section" id="about">
+      <div className="about-orb orb-left" />
+      <div className="about-orb orb-right" />
+
+      <motion.div
+        className="about-header"
+        initial={{ opacity: 0, y: 30 }}
+        whileInView={{ opacity: 1, y: 0 }}
+        viewport={{ once: true }}
+        transition={{ duration: 0.7 }}
+      >
+        <span className="about-tag">Who I Am</span>
+
+        <h2>
+          Turning ideas into
+          <span> real digital products</span>
+        </h2>
+
+        <p>
+          I’m Avinash Sharma — a founder, frontend developer and product thinker
+          who enjoys building startups, premium interfaces and meaningful user
+          experiences.
+        </p>
+      </motion.div>
 
       <div className="about-grid">
-        {/* LEFT */}
-        <div className="about-text">
-          <h3>Who I Am</h3>
+        <motion.div
+          className="about-story glass-card"
+          initial={{ opacity: 0, x: -40 }}
+          whileInView={{ opacity: 1, x: 0 }}
+          viewport={{ once: true }}
+          transition={{ duration: 0.7 }}
+        >
+          <div className="card-glow" />
+
+          <h3>My Story</h3>
+
           <p>
-            I’m <strong>Avinash Sharma</strong>, a <strong>Founder & Frontend Developer</strong>
-            who loves building real-world products from scratch. I don’t just focus
-            on UI — I think about users, scalability and long-term product vision.
+            I started with curiosity for coding, but soon I became passionate
+            about building complete products — not just writing code.
           </p>
 
           <p>
-            As the founder of <strong>Sanskaraa</strong>, I’ve experienced the full
-            journey of product building — identifying problems, designing solutions,
-            shipping MVPs and continuously improving based on feedback.
+            Today, I work with React, JavaScript and UI/UX to build premium,
+            modern and scalable experiences.
           </p>
 
           <p>
-            Alongside startups, I sharpen my technical foundation through React,
-            JavaScript, UI/UX design and computer science fundamentals.
+            As the founder of Sanskaraa, I’ve learned how to think like a
+            startup founder — solving problems, validating ideas and building
+            products people actually need.
           </p>
-        </div>
 
-        {/* RIGHT */}
-        <div className="about-timeline">
-          <h3>My Journey</h3>
-          <ul className="timeline">
-            <li>
-              <span className="timeline-dot" />
-              <div>
-                <h4>BCA Student</h4>
-                <p>
-                  Pursuing BCA while strengthening core CS concepts, DSA and
-                  problem-solving skills.
-                </p>
-              </div>
-            </li>
+          <div className="about-stats">
+            <div>
+              <h4>25+</h4>
+              <span>Projects</span>
+            </div>
 
-            <li>
-              <span className="timeline-dot" />
-              <div>
-                <h4>Frontend Developer</h4>
-                <p>
-                  Built multiple React-based applications, focusing on clean UI,
-                  performance and reusable components.
-                </p>
-              </div>
-            </li>
+            <div>
+              <h4>2+</h4>
+              <span>Years Learning</span>
+            </div>
 
-            <li>
-              <span className="timeline-dot" />
-              <div>
-                <h4>Founder @ Sanskaraa</h4>
-                <p>
-                  Building a full-fledged event & puja services platform —
-                  handling product, design and frontend execution.
-                </p>
-              </div>
-            </li>
+            <div>
+              <h4>1</h4>
+              <span>Startup Vision</span>
+            </div>
+          </div>
+        </motion.div>
 
-            <li>
-              <span className="timeline-dot" />
-              <div>
-                <h4>Future Vision</h4>
-                <p>
-                  Become a strong full-stack engineer, crack NIMCET and scale
-                  impactful tech products & startups.
-                </p>
-              </div>
-            </li>
-          </ul>
-        </div>
+        <motion.div
+          className="journey-grid"
+          initial={{ opacity: 0, x: 40 }}
+          whileInView={{ opacity: 1, x: 0 }}
+          viewport={{ once: true }}
+          transition={{ duration: 0.7 }}
+        >
+          {cards.map((item, index) => (
+            <motion.div
+              className="journey-card glass-card"
+              key={index}
+              whileHover={{ y: -10 }}
+            >
+              <div className="journey-icon">{item.icon}</div>
+              <h4>{item.title}</h4>
+              <p>{item.text}</p>
+            </motion.div>
+          ))}
+        </motion.div>
       </div>
-    </motion.section>
+    </section>
   );
 };
 
