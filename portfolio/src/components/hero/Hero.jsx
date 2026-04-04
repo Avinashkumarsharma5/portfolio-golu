@@ -1,12 +1,15 @@
-// Hero.jsx - Premium 3D Split Layout Hero Component
+// Hero.jsx - Premium 3D Split Layout Hero Component with Advanced Effects
 import React, { useState, useEffect, useCallback, useMemo, useRef } from "react";
-import { motion, useScroll, useTransform, useReducedMotion } from "framer-motion";
+import { motion, useScroll, useTransform } from "framer-motion";
 import Tilt from "react-parallax-tilt";
 import Particles from "react-tsparticles";
 import { loadSlim } from "tsparticles-slim";
 import { FaGithub, FaLinkedin, FaEnvelope, FaReact, FaFigma, FaRocket } from "react-icons/fa";
 import { SiTailwindcss, SiFramer, SiNextdotjs } from "react-icons/si";
 import "./Hero.css";
+
+// Import your profile image (update path as needed)
+import profileImg from "../../assets/photoavinash.jpeg";
 
 // Rotating identity words for typing effect
 const WORDS = [
@@ -50,9 +53,23 @@ function useTyping(words, speed = 120, delay = 900) {
 }
 
 export default function HeroPremium() {
-  const prefersReducedMotion = useReducedMotion();
   const typingText = useTyping(WORDS, 100, 1000);
   const containerRef = useRef(null);
+  const imageRef = useRef(null);
+  
+  // Mouse move effect for image rotation
+  const [mousePosition, setMousePosition] = useState({ x: 0, y: 0 });
+  
+  const handleMouseMove = (e) => {
+    const rect = e.currentTarget.getBoundingClientRect();
+    const x = ((e.clientX - rect.left) / rect.width - 0.5) * 20;
+    const y = ((e.clientY - rect.top) / rect.height - 0.5) * 20;
+    setMousePosition({ x, y });
+  };
+  
+  const handleMouseLeave = () => {
+    setMousePosition({ x: 0, y: 0 });
+  };
 
   // Scroll-based parallax motion
   const { scrollYProgress } = useScroll({
@@ -121,15 +138,13 @@ export default function HeroPremium() {
     []
   );
 
-  // Floating cards data
-  const floatingCards = [
-    { text: "🚀 Founder @ Sanskaraa", className: "card-1", delay: 0 },
-    { text: "⚡ 25+ Projects", className: "card-2", delay: 1.5 },
-    { text: "💼 Open for Collab", className: "card-3", delay: 3 },
-  ];
-
   return (
     <section ref={containerRef} className={`hero-premium ${theme}`}>
+      {/* Theme Toggle Button */}
+      <button onClick={toggleTheme} className="theme-toggle-btn" aria-label="Toggle theme">
+        {theme === "dark" ? "☀️" : "🌙"}
+      </button>
+
       {/* Particles Background */}
       <Particles
         id="tsparticles"
@@ -143,16 +158,14 @@ export default function HeroPremium() {
       <div className="grid-overlay" />
       <div className="noise-overlay" />
 
-      {/* Animated Gradient Blobs (enhanced depth) */}
+      {/* Animated Gradient Blobs */}
       <div className="blob-glow blob-1" />
       <div className="blob-glow blob-2" />
       <div className="blob-glow blob-3" />
 
-      
-
       {/* Main Grid Layout: 2 Columns */}
       <div className="hero-grid">
-        {/* LEFT SIDE: Text, Buttons, Stats */}
+        {/* LEFT SIDE: Text, Buttons, Stats with Glass Panel */}
         <motion.div
           className="hero-left"
           style={{ y: yLeft, opacity: opacityLeft }}
@@ -160,105 +173,114 @@ export default function HeroPremium() {
           animate={{ opacity: 1, x: 0 }}
           transition={{ duration: 0.8, ease: "easeOut" }}
         >
-          {/* Availability Badge */}
-          <div className="availability-badge">
-            <span className="pulse-dot"></span>
-            <span>Open for collaboration & startups</span>
-          </div>
-
-          {/* Main Heading - Cinematic */}
-          <h1 className="hero-title">
-            Crafting Digital
-            <br />
-            <span className="gradient-text">Products, Startups & Experiences</span>
-          </h1>
-
-          {/* Typing Subtitle */}
-          <div className="hero-role">
-            <span className="role-text">{typingText}</span>
-            <span className="cursor-blink">|</span>
-          </div>
-
-          {/* Description */}
-          <p className="hero-description">
-            I design, build and scale digital products — from idea & UX to clean,
-            scalable React code. I think like a founder and execute like a developer.
-          </p>
-
-          {/* Tech Badges with Floating Animation */}
-          <div className="tech-stack">
-            <span className="tech-badge"><FaReact /> React</span>
-            <span className="tech-badge"><SiNextdotjs /> Next.js</span>
-            <span className="tech-badge"><SiFramer /> Framer Motion</span>
-            <span className="tech-badge"><FaFigma /> UI/UX</span>
-            <span className="tech-badge"><SiTailwindcss /> Tailwind</span>
-          </div>
-
-          {/* CTA Buttons with Glow Effects */}
-          <div className="cta-group">
-            <motion.a
-              href="#contact"
-              className="btn-primary"
-              whileHover={{ scale: 1.05, y: -3 }}
-              whileTap={{ scale: 0.98 }}
-            >
-              <FaRocket /> Work With Me
-            </motion.a>
-            <motion.a
-              href="#projects"
-              className="btn-outline"
-              whileHover={{ scale: 1.05, y: -3 }}
-              whileTap={{ scale: 0.98 }}
-            >
-              View Projects →
-            </motion.a>
-          </div>
-
-          {/* Stats Row */}
-          <div className="stats-row">
-            <div className="stat-item">
-              <span className="stat-number">25+</span>
-              <span className="stat-label">Projects Shipped</span>
+          {/* Glass Panel Background */}
+          <div className="glass-panel"></div>
+          
+          {/* Content */}
+          <div className="hero-content-wrapper ">
+            {/* Availability Badge */}
+            <div className="availability-badge ">
+              <span className="pulse-dot "></span>
+              <span>Open for collaboration & startups</span>
             </div>
-            <div className="stat-divider"></div>
-            <div className="stat-item">
-              <span className="stat-number">2+</span>
-              <span className="stat-label">Years Building</span>
-            </div>
-            <div className="stat-divider"></div>
-            <div className="stat-item">
-              <span className="stat-number">100%</span>
-              <span className="stat-label">Client Satisfaction</span>
-            </div>
-          </div>
 
-          {/* Social Links */}
-          <div className="social-links">
-            <a href="https://github.com/Avinashkumarsharma5/" target="_blank" rel="noreferrer">
-              <FaGithub />
-            </a>
-            <a href="https://www.linkedin.com/in/sharmaavinash5/" target="_blank" rel="noreferrer">
-              <FaLinkedin />
-            </a>
-            <a href="mailto:bcaavinash01@gmail.com">
-              <FaEnvelope />
-            </a>
+            {/* Main Heading */}
+            <h1 className="hero-title">
+              Crafting Digital
+              <br />
+              <span className="gradient-text">Products, Startups & Experiences</span>
+            </h1>
+
+            {/* Typing Subtitle */}
+            <div className="hero-role">
+              <span className="role-text">{typingText}</span>
+              <span className="cursor-blink">|</span>
+            </div>
+
+            {/* Description */}
+            <p className="hero-description">
+              I design, build and scale digital products — from idea & UX to clean,
+              scalable React code. I think like a founder and execute like a developer.
+            </p>
+
+            {/* Tech Badges */}
+            <div className="tech-stack">
+              <span className="tech-badge"><FaReact /> React</span>
+              <span className="tech-badge"><SiNextdotjs /> Next.js</span>
+              <span className="tech-badge"><SiFramer /> Framer Motion</span>
+              <span className="tech-badge"><FaFigma /> UI/UX</span>
+              <span className="tech-badge"><SiTailwindcss /> Tailwind</span>
+            </div>
+
+            {/* CTA Buttons with Glass Reflection */}
+            <div className="cta-group">
+              <motion.a
+                href="#contact"
+                className="btn-primary"
+                whileHover={{ scale: 1.05, y: -3 }}
+                whileTap={{ scale: 0.98 }}
+              >
+                <FaRocket /> Work With Me
+              </motion.a>
+              <motion.a
+                href="#projects"
+                className="btn-outline"
+                whileHover={{ scale: 1.05, y: -3 }}
+                whileTap={{ scale: 0.98 }}
+              >
+                View Projects →
+              </motion.a>
+            </div>
+
+            {/* Stats Row - Card Style */}
+            <div className="stats-row">
+              <div className="stat-item">
+                <span className="stat-number">25+</span>
+                <span className="stat-label">Projects Shipped</span>
+              </div>
+              <div className="stat-item">
+                <span className="stat-number">2+</span>
+                <span className="stat-label">Years Building</span>
+              </div>
+              <div className="stat-item">
+                <span className="stat-number">100%</span>
+                <span className="stat-label">Client Satisfaction</span>
+              </div>
+            </div>
+
+            {/* Social Links */}
+            <div className="social-links">
+              <a href="https://github.com/Avinashkumarsharma5/" target="_blank" rel="noopener noreferrer">
+                <FaGithub />
+              </a>
+              <a href="https://www.linkedin.com/in/sharmaavinash5/" target="_blank" rel="noopener noreferrer">
+                <FaLinkedin />
+              </a>
+              <a href="mailto:bcaavinash01@gmail.com">
+                <FaEnvelope />
+              </a>
+            </div>
           </div>
         </motion.div>
 
-        {/* RIGHT SIDE: 3D Profile with Floating Cards */}
+        {/* RIGHT SIDE: 3D Profile with Floating Cards & Mouse Move Effect */}
         <motion.div
           className="hero-right"
           style={{ y: yRight, scale: scaleRight }}
           initial={{ opacity: 0, x: 60 }}
           animate={{ opacity: 1, x: 0 }}
           transition={{ duration: 0.8, delay: 0.2, ease: "easeOut" }}
+          onMouseMove={handleMouseMove}
+          onMouseLeave={handleMouseLeave}
         >
           <div className="profile-3d-wrapper">
-            {/* Glass Card Background with 3D Perspective */}
+            {/* Rotating Border Glow */}
+            <div className="rotating-border"></div>
+            
+            {/* Glass Card Background */}
             <div className="glass-card-bg"></div>
 
-            {/* Profile Image with Tilt and Float */}
+            {/* Profile Image with Tilt and Mouse Effect */}
             <Tilt
               tiltMaxAngleX={12}
               tiltMaxAngleY={12}
@@ -269,15 +291,19 @@ export default function HeroPremium() {
               className="tilt-container"
             >
               <motion.img
-                src="https://images.unsplash.com/photo-1539571696357-5a69c17a67c6?w=400&h=400&fit=crop"
+                src={profileImg}
                 alt="Avinash Sharma"
                 className="hero-img-3d"
+                style={{
+                  rotateX: mousePosition.y,
+                  rotateY: mousePosition.x,
+                }}
                 whileHover={{ scale: 1.02 }}
                 transition={{ duration: 0.3 }}
               />
             </Tilt>
 
-            {/* Floating Cards around the image */}
+            {/* Clean Floating Cards */}
             <div className="floating-card card-1">
               <span className="card-icon">🚀</span>
               <span>Building Sanskaraa</span>
@@ -291,11 +317,11 @@ export default function HeroPremium() {
               <span>Open for Collab</span>
             </div>
 
-            {/* Extra decorative ring */}
+            {/* Glow Ring */}
             <div className="glow-ring"></div>
           </div>
 
-          {/* Additional floating micro-card (fourth) */}
+          {/* Mini floating cards */}
           <div className="floating-card-mini mini-1">
             <span>🏆 15+ Clients</span>
           </div>
@@ -305,7 +331,7 @@ export default function HeroPremium() {
         </motion.div>
       </div>
 
-      {/* Scroll Indicator */}
+      {/* Modern Scroll Indicator */}
       <motion.div
         className="scroll-indicator"
         animate={{ y: [0, 8, 0] }}
@@ -320,7 +346,7 @@ export default function HeroPremium() {
         href="https://wa.me/916201486202"
         className="whatsapp-float"
         target="_blank"
-        rel="noreferrer"
+        rel="noopener noreferrer"
       >
         💬
       </a>
